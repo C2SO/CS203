@@ -16,7 +16,7 @@ public class GraphContainer {
     private int arraySize;
 
     public GraphContainer() {
-        
+
     }
 
     publc run() {

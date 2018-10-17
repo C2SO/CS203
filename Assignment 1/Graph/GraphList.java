@@ -9,10 +9,11 @@ public class GraphList {
 
     private int vertices;
     private int sides;
-    private GraphNode root;
+    private GraphNode head;
+    public GraphNode currNode;
 
     public GraphList() {
-        this.root = null;
+        this.head = null;
     }
 
     public getGraphList() {

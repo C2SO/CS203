@@ -7,8 +7,7 @@ package Graph;
 
 public class GraphNode {
 
-    public int data1;
-    public int dataNext;
+    private GraphObject data1;
     public GraphNode next;
 
     public GraphNode() {
