@@ -3,6 +3,8 @@ Nicholas Rahbany
 CS 203
 */
 
+package Graph;
+
 public class GraphNode {
 
     public int data1;
