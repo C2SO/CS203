@@ -7,25 +7,41 @@ package Graph;
 
 public class GraphList {
 
-    private int vertices;
-    private int sides;
     private GraphNode head;
+    private int numNodes;
     public GraphNode currNode;
 
     public GraphList() {
         this.head = null;
+        this.currNode = null;
+        this.numNodes = 0;
     }
 
     public getGraphList() {
 
     }
 
-    private setVertices(int input) {
-        this.vertices = input
+    public setHead(GraphNode newNode) {
+        this.head = newNode;
+        numNodes++;
     }
 
-    private setSides(int input) {
-        this.sides = input
+    public boolean associateAndAdd(GraphNode newNode) {
+        boolean isAdded = false;
+        currNode = this.head;
+        int currNodeIndex = 0;
+        while (!isAdded && currNode.next != null) {
+            if (currNode.associate(newNode)) {
+                for(int i = currNodeIndex; i < numNodes; i++) {
+                    currNode = currNode.next;
+                }
+                currNode.next = newNode;
+                numNodes++;
+                isAdded = true;
+            }
+            currNodeIndex++;
+        }
+        return isAdded;
     }
 
 }

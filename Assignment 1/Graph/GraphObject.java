@@ -23,4 +23,12 @@ public class GraphObject {
         return this.point2;
     }
 
+    public setPoint1(int input) {
+        this.point1 = input;
+    }
+
+    public setPoint2(int input) {
+        this.pointw = input;
+    }
+
 }
