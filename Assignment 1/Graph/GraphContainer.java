@@ -16,14 +16,14 @@ public class GraphContainer {
     private int arraySize;
     public int dataIndex;
     public int sizeIndex;
-    private String data1;
-    private String data2;
+    private int data1;
+    private int data2;
 
     public GraphContainer() {
         arraySize = 0;
     }
 
-    publc run() {
+    public void run() {
         inFile = new File("inputFile.txt");
         read = new Scanner(inFile);
         String line; // Defining a line in the input file
@@ -32,25 +32,22 @@ public class GraphContainer {
         while (read.hasNext()) { // If there is a line that hasn't been scanned
             line = read.nextLine(); // Scan the line
             data = line.split(" "); // Parse the line
-            graphArray = new Array[0]; // Array that will store the Linked Lists
+            graphArray = new GraphList[0]; // Array that will store the Linked Lists
             dataIndex = 1; // Used as an index for how many nodes are counted
             while (data[dataIndex] != null) {
                 nodeData = data[dataIndex].split(","); // Parse the data into two separate points
-                data1 = nodeData[0].substring(1, nodeData[0].length()); // Set the first point to only look for
-                                                                        // everything after the first
-                                                                        // parenthesis
-                data2 = nodeData[1].substring(0, nodeData[1].length()); // Set the second point to be everything
-                                                                        // until the last parenthesis
-                GraphNode node = new GraphNode(data1.toInt(), data2.toInt()); // New node that will be added
-                addNodeRec(node);
+                data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only look for everything after the first parenthesis
+                data2 = Integer.parseInt(nodeData[1].substring(0, nodeData[1].length())); // Set the second point to be everything until the last parenthesis
+                GraphNode node = new GraphNode(data1, data2); // New node that will be added
+                addNodeRec(node); // Adds node to linked list
             }
         }
 
         // Print result
     }
 
-    private Array[] addLinkedList(Array[] inputArray) {
-        Array[] newArray = new Array[arraySize + 1];
+    private GraphList[] addLinkedList(GraphList[] inputArray) {
+        GraphList[] newArray = new GraphList[arraySize + 1];
         for (int i = 0; i < arraySize; i++) {
             newArray[i] = inputArray[i];
         }
@@ -60,8 +57,8 @@ public class GraphContainer {
     private boolean associateAndAdd(GraphNode inputNode) {
         boolean isAdded = false;
         int listNumber = 0;
-        while(isAdded == false && GraphList[listNumber] != null) {
-            isAdded = GraphList[listNumber].associateAndAdd(inputNode);
+        while(isAdded == false && graphArray[listNumber] != null) {
+            isAdded = graphArray[listNumber].associateAndAdd(inputNode);
             listNumber++;
         }
         return isAdded;

@@ -17,11 +17,7 @@ public class GraphList {
         this.numNodes = 0;
     }
 
-    public getGraphList() {
-
-    }
-
-    public setHead(GraphNode newNode) {
+    public void setHead(GraphNode newNode) {
         this.head = newNode;
         numNodes++;
     }
