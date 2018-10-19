@@ -12,7 +12,7 @@ public class GraphContainer {
 
     private static File inFile;
     private static Scanner read;
-    private static Array[] graphArray;
+    private static GraphList[] graphArray;
     private int arraySize;
     public int dataIndex;
     public int sizeIndex;
@@ -67,14 +67,13 @@ public class GraphContainer {
         return isAdded;
     }
 
-    private addNodeRec(GraphNode newNode) {
+    public void addNodeRec(GraphNode newNode) {
         if (!associateAndAdd(newNode)) {
             GraphList list = new GraphList(); // Creates a new LinkedList
             addLinkedList(graphArray); // Adds linked list into array
             arraySize += 1; // Used to see how many linked lists are made
             addNodeRec(newNode);
         }
-        return;
     }
 
 }

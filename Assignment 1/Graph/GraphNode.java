@@ -11,9 +11,7 @@ public class GraphNode {
     public GraphNode next;
 
     public GraphNode(int data1, int data2) {
-        GraphObject nodeObject = new GraphObject();
-        nodeObject.setPoint1(data1);
-        nodeObject.setPoint2(data2);
+        GraphObject nodeObject = new GraphObject(data1, data2);
     }
 
     public boolean associate(GraphNode node) {
