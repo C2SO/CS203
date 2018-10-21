@@ -12,7 +12,7 @@ public class GraphContainer {
 
     private static File inFile;// Input File
     private static Scanner read; // Scanner used to read input file
-    private static GraphList[] graphArray; // Array of GraphList objects
+    private GraphList[] graphArray; // Array of GraphList objects
     private int arraySize; // Size of graphArray
     public int dataIndex; // Used as an index for how many nodes are counted per each input line from inFile
     private int data1; // Used as first data for GraphNode

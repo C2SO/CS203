@@ -12,8 +12,7 @@ public class GraphList {
     public GraphNode currNode;
 
     public GraphList() {
-        this.head = null;
-        this.currNode = null;
+        this.head = new GraphNode();
         this.numNodes = 0;
     }
 
@@ -26,7 +25,7 @@ public class GraphList {
         boolean isAdded = false;
         currNode = this.head;
         int currNodeIndex = 0;
-        while (!isAdded && currNode.next != null && currNode != null) {
+        while (!isAdded && currNode != null) {
             if (currNode.associate(newNode)) {
                 for(int i = currNodeIndex; i < numNodes; i++) {
                     currNode = currNode.next;
