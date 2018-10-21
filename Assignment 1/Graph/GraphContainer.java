@@ -10,14 +10,13 @@ import java.util.*;
 
 public class GraphContainer {
 
-    private static File inFile;
-    private static Scanner read;
-    private static GraphList[] graphArray;
-    private int arraySize;
-    public int dataIndex;
-    public int sizeIndex;
-    private int data1;
-    private int data2;
+    private static File inFile;// Input File
+    private static Scanner read; // Scanner used to read input file
+    private static GraphList[] graphArray; // Array of GraphList objects
+    private int arraySize; // Size of graphArray
+    public int dataIndex; // Used as an index for how many nodes are counted per each input line from inFile
+    private int data1; // Used as first data for GraphNode
+    private int data2; // Used as second data for GraphNode
 
     public GraphContainer() {
         arraySize = 0;
@@ -25,7 +24,11 @@ public class GraphContainer {
 
     public void run() {
         inFile = new File("inputFile.txt");
-        read = new Scanner(inFile);
+        try {
+            read = new Scanner(inFile);
+        } catch (FileNotFoundException invalidFile) {
+            System.out.println("Input a valid file name");
+        }
         String line; // Defining a line in the input file
         String[] data; // An array of the line when parsed
         String[] nodeData; // Array used to store new node's data
@@ -36,10 +39,15 @@ public class GraphContainer {
             dataIndex = 1; // Used as an index for how many nodes are counted
             while (data[dataIndex] != null) {
                 nodeData = data[dataIndex].split(","); // Parse the data into two separate points
-                data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only look for everything after the first parenthesis
-                data2 = Integer.parseInt(nodeData[1].substring(0, nodeData[1].length())); // Set the second point to be everything until the last parenthesis
+                data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only
+                                                                                          // look for everything after
+                                                                                          // the first parenthesis
+                data2 = Integer.parseInt(nodeData[1].substring(0, nodeData[1].length() - 1)); // Set the second point to
+                                                                                              // be everything until the
+                                                                                              // last parenthesis
                 GraphNode node = new GraphNode(data1, data2); // New node that will be added
                 addNodeRec(node); // Adds node to linked list
+                dataIndex++;
             }
         }
 
@@ -51,23 +59,23 @@ public class GraphContainer {
         for (int i = 0; i < arraySize; i++) {
             newArray[i] = inputArray[i];
         }
+        newArray[arraySize] = new GraphList();
         return newArray;
     }
 
     private boolean associateAndAdd(GraphNode inputNode) {
         boolean isAdded = false;
-        int listNumber = 0;
-        while(isAdded == false && graphArray[listNumber] != null) {
-            isAdded = graphArray[listNumber].associateAndAdd(inputNode);
-            listNumber++;
+        for (int i = 0; i < arraySize; i++) {
+            if (isAdded == false) {
+                isAdded = graphArray[i].associateAndAdd(inputNode);
+            }
         }
         return isAdded;
     }
 
-    public void addNodeRec(GraphNode newNode) {
+    public void addNodeRec(GraphNode newNode) { // Adds nodes recursively
         if (!associateAndAdd(newNode)) {
-            GraphList list = new GraphList(); // Creates a new LinkedList
-            addLinkedList(graphArray); // Adds linked list into array
+            graphArray = addLinkedList(graphArray); // Adds linked list into array
             arraySize += 1; // Used to see how many linked lists are made
             addNodeRec(newNode);
         }

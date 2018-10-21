@@ -7,11 +7,12 @@ package Graph;
 
 public class GraphNode {
 
-    private GraphObject data1;
+    public GraphObject data1;
     public GraphNode next;
 
     public GraphNode(int data1, int data2) {
-        GraphObject nodeObject = new GraphObject(data1, data2);
+        this.data1 = new GraphObject(data1, data2);
+        this.next = null;
     }
 
     public boolean associate(GraphNode node) {

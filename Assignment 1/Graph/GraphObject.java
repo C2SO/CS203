@@ -7,12 +7,12 @@ package Graph;
 
 public class GraphObject {
 
-    private int point1;
-    private int point2;
+    public int point1;
+    public int point2;
 
-    public GraphObject(int first, int second) {
-        this.point1 = first;
-        this.point2 = second;
+    public GraphObject(int input1, int input2) {
+        setPoint1(input1);
+        setPoint2(input2);    
     }
 
     public int getPoint1() {
