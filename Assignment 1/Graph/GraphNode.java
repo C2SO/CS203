@@ -9,14 +9,7 @@ public class GraphNode {
 
     public int point1;
     public int point2;
-    public GraphObject data1;
     public GraphNode next;
-
-    public GraphNode() {
-        setPoint1(-1);
-        setPoint2(-1);   
-        this.next = null;
-    }
 
     public GraphNode(int data1, int data2) {
         this.next = null;
@@ -26,13 +19,13 @@ public class GraphNode {
 
     public boolean associate(GraphNode node) {
         boolean associated = false;
-        if (node.data1.getPoint1() == this.data1.getPoint1()) {
+        if (node.getPoint1() == this.getPoint1()) {
             associated = true;
-        } else if (node.data1.getPoint1() == this.data1.getPoint2()) {
+        } else if (node.getPoint1() == this.getPoint2()) {
             associated = true;
-        } else if (node.data1.getPoint2() == this.data1.getPoint1()) {
+        } else if (node.getPoint2() == this.getPoint1()) {
             associated = true;
-        } else if (node.data1.getPoint1() == this.data1.getPoint1()) {
+        } else if (node.getPoint1() == this.getPoint1()) {
             associated = true;
         }
         return associated;

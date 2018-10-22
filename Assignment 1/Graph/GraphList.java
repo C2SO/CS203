@@ -12,30 +12,33 @@ public class GraphList {
     public GraphNode currNode;
 
     public GraphList() {
-        this.head = new GraphNode();
+        this.head = null;
         this.numNodes = 0;
     }
 
-    public void setHead(GraphNode newNode) {
-        this.head = newNode;
-        numNodes++;
-    }
-
-    public boolean associateAndAdd(GraphNode newNode) {
-        boolean isAdded = false;
+    public boolean associate(GraphNode newNode) {
+        boolean associated = false;
         currNode = this.head;
         int currNodeIndex = 0;
-        while (!isAdded && currNode != null) {
+        while (!associated && currNode != null) {
             if (currNode.associate(newNode)) {
-                for(int i = currNodeIndex; i < numNodes; i++) {
-                    currNode = currNode.next;
-                }
-                currNode.next = newNode;
-                numNodes++;
-                isAdded = true;
+                associated = true;
             }
             currNodeIndex++;
         }
-        return isAdded;
+        if (numNodes == 0) {
+            associated = true;
+        }
+        return associated;
     }
+
+    public void add(GraphNode newNode) {
+        currNode = this.head;
+        while (currNode.next != null) {
+            currNode = currNode.next;
+        }
+        currNode.next = newNode;
+        numNodes++;
+    }
+
 }

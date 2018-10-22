@@ -18,9 +18,7 @@ public class GraphContainer {
     private int data1; // Used as first data for GraphNode
     private int data2; // Used as second data for GraphNode
 
-    public GraphContainer() {
-        arraySize = 0;
-    }
+    public GraphContainer() {}
 
     public void run() {
         inFile = new File("inputFile.txt");
@@ -33,6 +31,7 @@ public class GraphContainer {
         String[] data; // An array of the line when parsed
         String[] nodeData; // Array used to store new node's data
         while (read.hasNext()) { // If there is a line that hasn't been scanned
+            this.arraySize = 0;
             line = read.nextLine(); // Scan the line
             data = line.split(" "); // Parse the line
             graphArray = new GraphList[0]; // Array that will store the Linked Lists
@@ -67,17 +66,19 @@ public class GraphContainer {
         boolean isAdded = false;
         for (int i = 0; i < arraySize; i++) {
             if (isAdded == false) {
-                isAdded = graphArray[i].associateAndAdd(inputNode);
+                if (graphArray[i].associate(inputNode)) {
+                    graphArray[i].add(inputNode);
+                    isAdded = true;
+                }
             }
         }
         return isAdded;
     }
 
     public void addNodeRec(GraphNode newNode) { // Adds nodes recursively
-        if (!associateAndAdd(newNode)) {
+        while (!associateAndAdd(newNode)) {
             graphArray = addLinkedList(graphArray); // Adds linked list into array
             arraySize += 1; // Used to see how many linked lists are made
-            addNodeRec(newNode);
         }
     }
 
