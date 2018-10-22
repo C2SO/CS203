@@ -45,4 +45,12 @@ public class GraphList {
         numNodes++;
     }
 
+    public GraphNode getHead() {
+        return this.head;
+    }
+
+    public int getNumNodes() {
+        return this.numNodes;
+    }
+
 }

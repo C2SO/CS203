@@ -14,11 +14,15 @@ public class GraphContainer {
     private static Scanner read; // Scanner used to read input file
     private GraphList[] graphArray; // Array of GraphList objects
     private int arraySize; // Size of graphArray
-    public int dataIndex; // Used as an index for how many nodes are counted per each input line from inFile
+    public int dataIndex; // Used as an index for how many nodes are counted per each input line from
+                          // inFile
     private int data1; // Used as first data for GraphNode
     private int data2; // Used as second data for GraphNode
+    public int[] listAssociated; // Array of associated list IDs
+    public int listAssociatedSize; // Int size of associated lists
 
-    public GraphContainer() {}
+    public GraphContainer() {
+    }
 
     public void run() {
         inFile = new File("inputFile.txt");
@@ -36,6 +40,8 @@ public class GraphContainer {
             data = line.split(" "); // Parse the line
             graphArray = new GraphList[0]; // Array that will store the Linked Lists
             dataIndex = 1; // Used as an index for how many nodes are counted
+            listAssociated = new int[0];
+            listAssociatedSize = 0;
             for (int i = 1; i < data.length; i++) {
                 nodeData = data[dataIndex].split(","); // Parse the data into two separate points
                 data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only
@@ -62,24 +68,67 @@ public class GraphContainer {
         return newArray;
     }
 
-    private boolean associateAndAdd(GraphNode inputNode) {
+    private boolean associate(GraphNode inputNode) {
         boolean isAdded = false;
         for (int i = 0; i < arraySize; i++) {
-            if (isAdded == false) {
-                if (graphArray[i].associate(inputNode)) {
-                    graphArray[i].add(inputNode);
-                    isAdded = true;
-                }
+            if (graphArray[i].associate(inputNode)) {
+                addAssociatedArray(i);
+                isAdded = true;
             }
         }
         return isAdded;
     }
 
     public void addNodeRec(GraphNode newNode) { // Adds nodes recursively
-        while (!associateAndAdd(newNode)) {
+        while (!associate(newNode)) {
             graphArray = addLinkedList(graphArray); // Adds linked list into array
             arraySize += 1; // Used to see how many linked lists are made
         }
+        add(listAssociated, newNode);
+    }
+
+    public void addAssociatedArray(int associated) {
+        int[] newArray = new int[listAssociatedSize + 1];
+        for (int i = 0; i < listAssociatedSize; i++) {
+            newArray[i] = listAssociated[i];
+        }
+        newArray[listAssociatedSize] = associated;
+        listAssociated = newArray;
+    }
+
+    public void add(int[] associated, GraphNode inputNode) {
+        while (associated.length > 1) {
+            combineList(associated[0], associated[1]);
+        }
+        int i = associated[0];
+        graphArray[i].add(inputNode);
+    }
+
+    public void combineList(int firstList, int secondList) {
+        GraphList newList = new GraphList();
+        GraphList first = graphArray[firstList];
+        GraphList second = graphArray[secondList];
+        GraphNode firstHead = first.getHead();
+        GraphNode secondHead = first.getHead();
+        GraphNode currNode = firstHead;
+        for (int i = 0; i < first.getNumNodes(); i++) {
+            newList.add(currNode);
+            currNode = currNode.next;
+        }
+        currNode = secondHead;
+        for (int i = 0; i < second.getNumNodes(); i++) {
+            newList.add(currNode);
+            currNode = currNode.next;
+        }
+        GraphList[] associatedList = new GraphList[arraySize-1];
+        int graphArrayIndex = 0;
+        for(int i = 0; i < arraySize; i++) {
+            if (i != secondList) {
+                associatedList[i] = graphArray[graphArrayIndex];
+            }
+            graphArrayIndex++;
+        }
+        graphArray = associatedList;
     }
 
 }
