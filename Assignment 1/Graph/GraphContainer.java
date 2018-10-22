@@ -36,7 +36,7 @@ public class GraphContainer {
             data = line.split(" "); // Parse the line
             graphArray = new GraphList[0]; // Array that will store the Linked Lists
             dataIndex = 1; // Used as an index for how many nodes are counted
-            while (data[dataIndex] != null) {
+            for (int i = 1; i < data.length; i++) {
                 nodeData = data[dataIndex].split(","); // Parse the data into two separate points
                 data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only
                                                                                           // look for everything after

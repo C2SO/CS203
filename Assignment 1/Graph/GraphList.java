@@ -19,12 +19,11 @@ public class GraphList {
     public boolean associate(GraphNode newNode) {
         boolean associated = false;
         currNode = this.head;
-        int currNodeIndex = 0;
         while (!associated && currNode != null) {
             if (currNode.associate(newNode)) {
                 associated = true;
             }
-            currNodeIndex++;
+            currNode = currNode.next;
         }
         if (numNodes == 0) {
             associated = true;
@@ -34,6 +33,11 @@ public class GraphList {
 
     public void add(GraphNode newNode) {
         currNode = this.head;
+        if (currNode == null) {
+            this.head = newNode;
+            this.numNodes++;
+            return;
+        }
         while (currNode.next != null) {
             currNode = currNode.next;
         }
