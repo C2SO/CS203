@@ -25,11 +25,11 @@ public class GraphContainer {
     }
 
     public void run() {
-        inFile = new File("inputFile.txt");
+        inFile = new File("inputFile.txt"); // Defines the input file
         try {
-            read = new Scanner(inFile);
+            read = new Scanner(inFile); //  Try to scan the file
         } catch (FileNotFoundException invalidFile) {
-            System.out.println("Input a valid file name");
+            System.out.println("File name invalid. Use 'inputFile.txt'"); // If not, catch the error and print that the file name is invalid.
         }
         String line; // Defining a line in the input file
         String[] data; // An array of the line when parsed
@@ -113,32 +113,32 @@ public class GraphContainer {
 
     // Combines two linked lists together
     public void combineList(int firstList, int secondList) {
-        GraphList newList = new GraphList();
-        GraphList first = graphArray[firstList];
-        GraphList second = graphArray[secondList];
-        GraphNode firstHead = first.getHead();
-        GraphNode secondHead = second.getHead();
-        newList.add(firstHead);
-        newList.add(secondHead);
-        GraphList[] associatedList = new GraphList[arraySize - 1];
-        int graphArrayIndex = 0;
-        for (int i = 0; i < arraySize; i++) {
-            if (i != secondList) {
-                associatedList[graphArrayIndex] = graphArray[i];
+        GraphList newList = new GraphList(); // Defines the new list
+        GraphList first = graphArray[firstList]; // Gets the first associated array
+        GraphList second = graphArray[secondList]; // Gets the second associated array
+        GraphNode firstHead = first.getHead(); // Gets first's head
+        GraphNode secondHead = second.getHead(); // Gets second's head
+        newList.add(firstHead); // Adds the first list to the new list
+        newList.add(secondHead); // Adds the second list to the new list
+        GraphList[] associatedList = new GraphList[arraySize - 1]; // Creates a new list that will mock graphArray
+        int graphArrayIndex = 0; // Defines the index of the associatedList
+        for (int i = 0; i < arraySize; i++) { // For every list in graphArray
+            if (i != secondList) { // If the index does not equal the secondList's index
+                associatedList[graphArrayIndex] = graphArray[i]; // Copy the list into associatedList
+                graphArrayIndex++; // Increase the index by 1
             }
-            graphArrayIndex++;
         }
-        graphArray = associatedList;
-        int[] newAssociated = new int[listAssociated.length - 1];
-        int associatedIndex = 0;
-        for (int i = 0; i < listAssociated.length; i++) {
-            if (i != secondList) {
-                newAssociated[associatedIndex] = listAssociated[i];
+        graphArray = associatedList; // Sets graphArray to the value of associatedList
+        int[] newAssociated = new int[listAssociated.length - 1]; // Defines the listAssociated replacement
+        int associatedIndex = 0; // index for newAssociated
+        for (int i = 0; i < listAssociated.length; i++) { // For every associated list in listAssociated
+            if (i != secondList) { // If it does not equal the ID of the second list
+                newAssociated[associatedIndex] = listAssociated[i]; // Copy the number into newAssociated
+                associatedIndex++; // Increase the index by one
             }
-            associatedIndex++;
         }
-        listAssociated = newAssociated;
-        this.arraySize--;
+        listAssociated = newAssociated; // Sets listAssociated to the value of newAssociated
+        this.arraySize--; // Shrinks arraySize by one
     }
 
 }
