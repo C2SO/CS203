@@ -25,7 +25,7 @@ public class GraphNode {
             associated = true;
         } else if (node.getPoint2() == this.getPoint1()) {
             associated = true;
-        } else if (node.getPoint1() == this.getPoint1()) {
+        } else if (node.getPoint2() == this.getPoint2()) {
             associated = true;
         }
         return associated;
