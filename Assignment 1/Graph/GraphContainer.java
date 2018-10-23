@@ -40,9 +40,9 @@ public class GraphContainer {
             data = line.split(" "); // Parse the line
             graphArray = new GraphList[0]; // Array that will store the Linked Lists
             dataIndex = 1; // Used as an index for how many nodes are counted
-            listAssociated = new int[0];
-            listAssociatedSize = 0;
             for (int i = 1; i < data.length; i++) {
+                listAssociated = new int[0];
+                listAssociatedSize = 0;
                 nodeData = data[dataIndex].split(","); // Parse the data into two separate points
                 data1 = Integer.parseInt(nodeData[0].substring(1, nodeData[0].length())); // Set the first point to only
                                                                                           // look for everything after
@@ -87,7 +87,7 @@ public class GraphContainer {
             graphArray = addLinkedList(graphArray); // Adds linked list into array
             arraySize += 1; // Used to see how many linked lists are made
         }
-        add(listAssociated, newNode); // Add node to the associated list
+        add(newNode); // Add node to the associated list
     }
 
     // Adds the ID of the linked list into the array which stores the data
@@ -103,11 +103,11 @@ public class GraphContainer {
     }
 
     // Adds inputNode to the associated list
-    public void add(int[] associated, GraphNode inputNode) {
-        while (associated.length > 1) { // While the number of associated lists is > 1
-            combineList(associated[0], associated[1]); // Combine two lists together
+    public void add(GraphNode inputNode) {
+        while (listAssociated.length > 1) { // While the number of associated lists is > 1
+            combineList(listAssociated[0], listAssociated[1]); // Combine two lists together
         }
-        int i = associated[0]; // Sets the ID for the Linked List which the node will be added
+        int i = listAssociated[0]; // Sets the ID for the Linked List which the node will be added
         graphArray[i].add(inputNode); // Adds the node to the linked list
     }
 
@@ -117,26 +117,28 @@ public class GraphContainer {
         GraphList first = graphArray[firstList];
         GraphList second = graphArray[secondList];
         GraphNode firstHead = first.getHead();
-        GraphNode secondHead = first.getHead();
-        GraphNode currNode = firstHead;
-        for (int i = 0; i < first.getNumNodes(); i++) {
-            newList.add(currNode);
-            currNode = currNode.next;
-        }
-        currNode = secondHead;
-        for (int i = 0; i < second.getNumNodes(); i++) {
-            newList.add(currNode);
-            currNode = currNode.next;
-        }
+        GraphNode secondHead = second.getHead();
+        newList.add(firstHead);
+        newList.add(secondHead);
         GraphList[] associatedList = new GraphList[arraySize - 1];
         int graphArrayIndex = 0;
         for (int i = 0; i < arraySize; i++) {
             if (i != secondList) {
-                associatedList[i] = graphArray[graphArrayIndex];
+                associatedList[graphArrayIndex] = graphArray[i];
             }
             graphArrayIndex++;
         }
         graphArray = associatedList;
+        int[] newAssociated = new int[listAssociated.length - 1];
+        int associatedIndex = 0;
+        for (int i = 0; i < listAssociated.length; i++) {
+            if (i != secondList) {
+                newAssociated[associatedIndex] = listAssociated[i];
+            }
+            associatedIndex++;
+        }
+        listAssociated = newAssociated;
+        this.arraySize--;
     }
 
 }

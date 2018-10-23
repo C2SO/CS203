@@ -8,12 +8,10 @@ package Graph;
 public class GraphList {
 
     private GraphNode head;
-    private int numNodes;
     public GraphNode currNode;
 
     public GraphList() {
         this.head = null;
-        this.numNodes = 0;
     }
 
     public boolean associate(GraphNode newNode) {
@@ -25,7 +23,7 @@ public class GraphList {
             }
             currNode = currNode.next;
         }
-        if (numNodes == 0) {
+        if (this.head == null) {
             associated = true;
         }
         return associated;
@@ -35,22 +33,16 @@ public class GraphList {
         currNode = this.head;
         if (currNode == null) {
             this.head = newNode;
-            this.numNodes++;
             return;
         }
         while (currNode.next != null) {
             currNode = currNode.next;
         }
         currNode.next = newNode;
-        numNodes++;
     }
 
     public GraphNode getHead() {
         return this.head;
-    }
-
-    public int getNumNodes() {
-        return this.numNodes;
     }
 
 }
