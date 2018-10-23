@@ -27,9 +27,10 @@ public class GraphContainer {
     public void run() {
         inFile = new File("inputFile.txt"); // Defines the input file
         try {
-            read = new Scanner(inFile); //  Try to scan the file
+            read = new Scanner(inFile); // Try to scan the file
         } catch (FileNotFoundException invalidFile) {
-            System.out.println("File name invalid. Use 'inputFile.txt'"); // If not, catch the error and print that the file name is invalid.
+            System.out.println("File name invalid. Use 'inputFile.txt'"); // If not, catch the error and print that the
+                                                                          // file name is invalid.
         }
         String line; // Defining a line in the input file
         String[] data; // An array of the line when parsed
