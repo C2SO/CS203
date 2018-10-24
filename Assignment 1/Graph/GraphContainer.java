@@ -218,47 +218,53 @@ public class GraphContainer {
                         inListOfPoints2 = true;
                     }
                 }
-                if (inListOfPoints1 == false) {
-                    int index1 = 0;
-                    while (listOfPoints[index1] != 0) {
+                if (inListOfPoints1 == false) { // If point1 is not in listOfPoints
+                    int index1 = 0; // Used as an index for listOfPoints
+                    while (listOfPoints[index1] != 0) { // While listOfPoints at position index1 does not equal 0
                         index1++;
                     }
-                    listOfPoints[index1] = currNode.getPoint1();
+                    listOfPoints[index1] = currNode.getPoint1(); // listOfPoints at index1 now is set to point1
                 } 
-                if (inListOfPoints2 == false) {
-                    int index2 = 0;
-                    while (listOfPoints[index2] != 0) {
+                if (inListOfPoints2 == false) { // If point2 is not in listOfPoints
+                    int index2 = 0; // Use as an index for listOfPoints
+                    while (listOfPoints[index2] != 0) { // While listOfPoints at position index2 does not equal 0
                         index2++;
                     }
-                    listOfPoints[index2] = currNode.getPoint2();
+                    listOfPoints[index2] = currNode.getPoint2(); // listOfPoints at index2 now is set to point2
                 }
                 currNode = currNode.next;
             }
-            listOfPoints = removeBlanks(listOfPoints);
+            listOfPoints = removeBlanks(listOfPoints); //  Remove blank spaces in listOfPoints
             System.out.print("{");
-            for (int listIndex = 0; listIndex < listOfPoints.length; listIndex++) {
+            for (int listIndex = 0; listIndex < listOfPoints.length; listIndex++) { // Print every value in listOfPoints
                 System.out.print(" " + listOfPoints[listIndex]);
             }
             System.out.print(" } ");
         }
     }
 
+    /***********************************************************/
+    /* Method: removeBlanks                                    */
+    /* Purpose: Removes the "blank" spaces in an int[] array   */
+    /* Parameters:                                             */
+    /*      int[] list: The list that will be formatted        */
+    /* Returns: int[]: New int[] without "blank" spaces        */
+    /***********************************************************/
     public int[] removeBlanks(int[] list) {
         int counter = 0;
-        for (int i = 0; i < list.length; i++) {
-            if (list[i] == 0) {
+        for (int i = 0; i < list.length; i++) { // For every value in list
+            if (list[i] == 0) { // If list[i] is 0
                 counter++;
             }
         }
-        if (counter != 0) {
-            int[] newList;
-            newList = new int[list.length - counter];
-            for (int i = 0; i < list.length - counter; i++) {
-                newList[i] = list[i];
+        if (counter != 0) { // If there are "blank" spaces
+            int[] newList = new int[list.length - counter]; // Used as a replacement for list
+            for (int i = 0; i < list.length - counter; i++) { // For all the values leading up to the "blank" spaces
+                newList[i] = list[i]; // newList will have that same value
             }
-            return newList;
+            return newList; // Return a new int[] without the "blank" spaces
         }
-        return list;
+        return list; // If there are no blank spaces, return the original int[]
     }
 
 }

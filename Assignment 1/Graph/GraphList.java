@@ -71,10 +71,16 @@ public class GraphList {
         return this.head;
     }
 
+    /***************************************************************/
+    /* Method: getNumberOfPoints                                   */
+    /* Purpose: Retrieves the number of points in the linked list  */
+    /* Parameters:                                                 */
+    /* Returns: int: Number of unique points in linked list        */
+    /***************************************************************/
     public int getNumberOfPoints() {
         currNode = this.head;
-        int numNodes = 2;
-        while (currNode.next != null) {
+        int numNodes = 2; // Used as a counter points
+        while (currNode.next != null) { // While there are still nodes
             currNode = currNode.next;
             numNodes++;
         }
