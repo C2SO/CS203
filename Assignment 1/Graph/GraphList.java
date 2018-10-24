@@ -1,7 +1,9 @@
-/*
-Nicholas Rahbany
-CS 203
-*/
+/******************************/
+/* Nicholas Rahbany           */
+/* Login ID: rahb3032         */
+/* CS 203, Fall 2018          */
+/* Programming Assignment 1   */
+/******************************/
 
 package Graph;
 
@@ -10,12 +12,22 @@ public class GraphList {
     private GraphNode head; // List head node
     public GraphNode currNode; // Currently selected node
 
-    // Constructor for GraphList
+    /***********************************************/
+    /* Method: GraphList                           */
+    /* Purpose: Initializes the GraphList object   */
+    /* Parameters:                                 */
+    /***********************************************/
     public GraphList() {
         this.head = null;
     }
 
-    // Determines if a node is associated with the specified linked list
+    /**********************************************************************/
+    /* Method: associate                                                  */
+    /* Purpose: Determines if a node is associated with the linked list   */
+    /* Parameters:                                                        */
+    /*      GraphNode newNode: Node that is being compared                */
+    /* Returns: boolean: Is this node associated with the list?           */
+    /**********************************************************************/
     public boolean associate(GraphNode newNode) {
         boolean associated = false;
         currNode = this.head;
@@ -31,7 +43,12 @@ public class GraphList {
         return associated;
     }
 
-    // Adds a node to the specified linked list
+    /*****************************************************/
+    /* Method: add                                       */
+    /* Purpose: Adds a ndoe to the linked list           */
+    /* Parameters:                                       */
+    /*      GraphNode newNode: Node that is being added  */
+    /*****************************************************/
     public void add(GraphNode newNode) {
         currNode = this.head;
         if (currNode == null) { // If there is no head node
@@ -44,7 +61,12 @@ public class GraphList {
         currNode.next = newNode; // The next node is the new node
     }
 
-    // Returns the head node of this list
+    /*****************************************************/
+    /* Method: getHead                                   */
+    /* Purpose: Retrieves the head node of the list      */
+    /* Parameters:                                       */
+    /* Returns: GraphNode: The current list's head node  */
+    /*****************************************************/
     public GraphNode getHead() {
         return this.head;
     }

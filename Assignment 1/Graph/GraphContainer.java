@@ -1,7 +1,9 @@
-/*
-Nicholas Rahbany
-CS 203
-*/
+/******************************/
+/* Nicholas Rahbany           */
+/* Login ID: rahb3032         */
+/* CS 203, Fall 2018          */
+/* Programming Assignment 1   */
+/******************************/
 
 package Graph;
 
@@ -21,9 +23,18 @@ public class GraphContainer {
     public int[] listAssociated; // Array of associated list IDs
     public int listAssociatedSize; // Int size of associated lists
 
-    public GraphContainer() {
-    }
+    /***************************************************/
+    /* Method: GraphContainer                          */
+    /* Purpose: Initializes the GraphContainer object  */
+    /* Parameters:                                     */
+    /***************************************************/
+    public GraphContainer() { }
 
+    /*******************************/
+    /* Method: run                 */
+    /* Purpose: Runs the program   */
+    /* Parameters:                 */
+    /*******************************/
     public void run() {
         inFile = new File("inputFile.txt"); // Defines the input file
         try {
@@ -60,7 +71,13 @@ public class GraphContainer {
         // Print result
     }
 
-    // Adds a new linked list to the graphArray object
+    /***************************************************************************/
+    /* Method: addLinkedList                                                   */
+    /* Purpose: Adds a linked list to graphArray                               */
+    /* Parameters:                                                             */
+    /*      GraphList[] inputArray: current array that holds the linked lists  */
+    /* Returns: GraphList: Replacement for graphArray                          */
+    /***************************************************************************/
     private GraphList[] addLinkedList(GraphList[] inputArray) {
         GraphList[] newArray = new GraphList[arraySize + 1]; // Initializes new linked list
         for (int i = 0; i < arraySize; i++) { // Resizes graphArray
@@ -70,7 +87,13 @@ public class GraphContainer {
         return newArray;
     }
 
-    // Associated the new node to a linked list
+    /*****************************************************************/
+    /* Method: associate                                             */
+    /* Purpose: Checks if node is associated to any linked lists     */
+    /* Parameters:                                                   */
+    /*      GraphNode inputNode: Node that is going to be added      */
+    /* Returns: boolean: Is the node associated with a linked list?  */
+    /*****************************************************************/
     private boolean associate(GraphNode inputNode) {
         boolean isAdded = false;
         for (int i = 0; i < arraySize; i++) { // For each linked list
@@ -82,7 +105,13 @@ public class GraphContainer {
         return isAdded;
     }
 
-    // Adds a node to the linked lists
+    /************************************************************/
+    /* Method: addNodeRec                                       */
+    /* Purpose: Repeating function to add a node to graphArray  */
+    /* Parameters:                                              */
+    /*      int data1: First point in the node                  */
+    /*      int data2: Second point in the node                 */
+    /************************************************************/
     public void addNodeRec(GraphNode newNode) { // Adds nodes recursively
         while (!associate(newNode)) { // While the node hasn't been associated
             graphArray = addLinkedList(graphArray); // Adds linked list into array
@@ -91,7 +120,12 @@ public class GraphContainer {
         add(newNode); // Add node to the associated list
     }
 
-    // Adds the ID of the linked list into the array which stores the data
+    /******************************************************************/
+    /* Method: addAssociatedArray                                     */
+    /* Purpose:  Adds the ID of an associated list to listAssociated  */
+    /* Parameters:                                                    */
+    /*      int associated: ID of list associated with node           */
+    /******************************************************************/
     public void addAssociatedArray(int associated) {
         int[] newArray = new int[listAssociatedSize + 1]; // Creates a new array that is one size larger than the
                                                           // current listAssociated array
@@ -103,7 +137,12 @@ public class GraphContainer {
         listAssociatedSize++; // Increase the size of the array
     }
 
-    // Adds inputNode to the associated list
+    /****************************************************************************************************/
+    /* Method: add                                                                                      */
+    /* Purpose:  Used as a medium function to first join lists, need be, then add the node to the list  */
+    /* Parameters:                                                                                      */
+    /*      GraphNode inputNode: Node that is being added to a linked list                              */
+    /****************************************************************************************************/
     public void add(GraphNode inputNode) {
         while (listAssociated.length > 1) { // While the number of associated lists is > 1
             combineList(listAssociated[0], listAssociated[1]); // Combine two lists together
@@ -112,7 +151,13 @@ public class GraphContainer {
         graphArray[i].add(inputNode); // Adds the node to the linked list
     }
 
-    // Combines two linked lists together
+    /*******************************************************/
+    /* Method: combineList                                 */
+    /* Purpose:  Combines linked lists together            */
+    /* Parameters:                                         */
+    /*      int firstList: ID of the first linked list     */
+    /*      int secondList: ID of the second linked list   */
+    /*******************************************************/
     public void combineList(int firstList, int secondList) {
         GraphList newList = new GraphList(); // Defines the new list
         GraphList first = graphArray[firstList]; // Gets the first associated array
