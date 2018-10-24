@@ -234,7 +234,8 @@ public class GraphContainer {
                 }
                 currNode = currNode.next;
             }
-            listOfPoints = removeBlanks(listOfPoints); //  Remove blank spaces in listOfPoints
+            listOfPoints = removeBlanks(listOfPoints); //  Remove blank spaces in 
+            formatList(listOfPoints); // Sorts list
             System.out.print("{");
             for (int listIndex = 0; listIndex < listOfPoints.length; listIndex++) { // Print every value in listOfPoints
                 System.out.print(" " + listOfPoints[listIndex]);
@@ -265,6 +266,24 @@ public class GraphContainer {
             return newList; // Return a new int[] without the "blank" spaces
         }
         return list; // If there are no blank spaces, return the original int[]
+    }
+
+    /******************************************************/
+    /* Method: formatList                                 */
+    /* Purpose: Sorts an int[] list                       */
+    /* Parameters:                                        */
+    /*      int[] list: The list that will be formatted   */
+    /******************************************************/
+    public void formatList(int[] listIn) {
+        for (int i = 0; i < listIn.length; i++) {
+            for (int j = 0; j < listIn.length - i - 1; j++) {
+                if (listIn[j] > listIn[j+1]) { 
+                    int temp = listIn[j]; 
+                    listIn[j] = listIn[j+1]; 
+                    listIn[j+1] = temp; 
+                } 
+            }
+        }
     }
 
 }
