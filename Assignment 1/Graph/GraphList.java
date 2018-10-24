@@ -71,4 +71,14 @@ public class GraphList {
         return this.head;
     }
 
+    public int getNumberOfPoints() {
+        currNode = this.head;
+        int numNodes = 2;
+        while (currNode.next != null) {
+            currNode = currNode.next;
+            numNodes++;
+        }
+        return numNodes;
+    }
+
 }

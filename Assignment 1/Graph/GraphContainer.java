@@ -46,7 +46,9 @@ public class GraphContainer {
         String line; // Defining a line in the input file
         String[] data; // An array of the line when parsed
         String[] nodeData; // Array used to store new node's data
+        int graphNumber = 0; // Line number that will be used in printing results
         while (read.hasNext()) { // If there is a line that hasn't been scanned
+            graphNumber++;
             this.arraySize = 0;
             line = read.nextLine(); // Scan the line
             data = line.split(" "); // Parse the line
@@ -66,9 +68,15 @@ public class GraphContainer {
                 addNodeRec(node); // Adds node to linked list
                 dataIndex++;
             }
+            System.out.println("/*************************************************************************************************************/");
+            System.out.println("Graph " + graphNumber + ":");
+            System.out.print(graphArray.length + " connected components: ");
+            printComponents();
+            // Print Cycle
+            System.out.println("\n");
+            
         }
-
-        // Print result
+        System.out.println("/*************************************************************************************************************/");
     }
 
     /***************************************************************************/
@@ -185,6 +193,72 @@ public class GraphContainer {
         }
         listAssociated = newAssociated; // Sets listAssociated to the value of newAssociated
         this.arraySize--; // Shrinks arraySize by one
+    }
+
+    /**************************************************/
+    /* Method: printComponents                        */
+    /* Purpose: Prints the components of graphArray   */
+    /* Parameters:                                    */
+    /**************************************************/
+    public void printComponents() {
+        for (int i = 0; i < graphArray.length; i++) { // For every list in graphArray
+            int numberOfPoints = graphArray[i].getNumberOfPoints(); // Number of Points in current list
+            int[] listOfPoints = new int[numberOfPoints]; // New array that will hold each point
+            listOfPoints[0] = graphArray[i].getHead().getPoint1();
+            listOfPoints[1] = graphArray[i].getHead().getPoint2();
+            GraphNode currNode = graphArray[i].getHead();
+            for (int j = 1; j < listOfPoints.length; j++) { // For every node in the list
+                boolean inListOfPoints1 = false; // Boolean that will show if point 1 is in the list
+                boolean inListOfPoints2 = false; // Boolean that will show if point 2 is in the list
+                for (int k = 0; k < numberOfPoints; k++) { // For every space in listOfPoints
+                    if (currNode.getPoint1() == listOfPoints[k]) { // If point 1 is in listOfPoints
+                        inListOfPoints1 = true;
+                    }
+                    if (currNode.getPoint2() == listOfPoints[k]) { // If point 2 is in listOfPoints
+                        inListOfPoints2 = true;
+                    }
+                }
+                if (inListOfPoints1 == false) {
+                    int index1 = 0;
+                    while (listOfPoints[index1] != 0) {
+                        index1++;
+                    }
+                    listOfPoints[index1] = currNode.getPoint1();
+                } 
+                if (inListOfPoints2 == false) {
+                    int index2 = 0;
+                    while (listOfPoints[index2] != 0) {
+                        index2++;
+                    }
+                    listOfPoints[index2] = currNode.getPoint2();
+                }
+                currNode = currNode.next;
+            }
+            listOfPoints = removeBlanks(listOfPoints);
+            System.out.print("{");
+            for (int listIndex = 0; listIndex < listOfPoints.length; listIndex++) {
+                System.out.print(" " + listOfPoints[listIndex]);
+            }
+            System.out.print(" } ");
+        }
+    }
+
+    public int[] removeBlanks(int[] list) {
+        int counter = 0;
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == 0) {
+                counter++;
+            }
+        }
+        if (counter != 0) {
+            int[] newList;
+            newList = new int[list.length - counter];
+            for (int i = 0; i < list.length - counter; i++) {
+                newList[i] = list[i];
+            }
+            return newList;
+        }
+        return list;
     }
 
 }
