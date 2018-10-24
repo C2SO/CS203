@@ -1,7 +1,9 @@
-/*
-Nicholas Rahbany
-CS 203
-*/
+/******************************/
+/* Nicholas Rahbany           */
+/* Login ID: rahb3032         */
+/* CS 203, Fall 2018          */
+/* Programming Assignment 1   */
+/******************************/
 
 import Graph.GraphContainer;;
 
