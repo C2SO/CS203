@@ -70,10 +70,14 @@ public class GraphContainer {
             }
             System.out.println("/*************************************************************************************************************/");
             System.out.println("Graph " + graphNumber + ":");
-            System.out.print(graphArray.length + " connected components: ");
+            if (graphArray.length == 1) {
+                System.out.print("1 connected component: ");
+            } else {
+                System.out.print(graphArray.length + " connected components: ");
+            }
             printComponents();
             // Print Cycle
-            System.out.println("\n");
+            System.out.println();
             
         }
         System.out.println("/*************************************************************************************************************/");
