@@ -6,8 +6,14 @@ import java.io.*;
 
 public class Main {
     File outputFile;
+    public static MergeSort mergeSort;
+    public static InsertionSort insertionSort;
+    public static QuickSort quickSort;
 
     public static void main(String[] args) {
+        quickSort = new QuickSort();
+        insertionSort = new InsertionSort();
+        mergeSort = new MergeSort();
         int[] array1 = buildArray(1000);
         int[] array2 = buildArray(5000);
         int[] array3 = buildArray(10000);
@@ -16,7 +22,7 @@ public class Main {
         test(array1);
     }
 
-    private static int[] buildArray(int size) {
+    public static int[] buildArray(int size) {
         Random random = new Random();
         int[] array = new int[size];
         for (int i = 0; i < size; i++) {
@@ -25,13 +31,13 @@ public class Main {
         return array;
     }
 
-    private static void test(int[] array) {
+    public static void test(int[] array) {
         int[] resultsInsertion = new int[3]; //[comps, swaps, time]
         int[] resultsMerge = new int[3];
         int[] resultsQuick = new int[3];
-        retultsInsertion = insertionSort(array);
-        resultsMerge = mergeSort(array);
-        resultsQuick = quickSort(array);
+        resultsInsertion = insertionSort.start(array);
+        resultsMerge = mergeSort.start(array);
+        resultsQuick = quickSort.start(array);
     }
 
 }
