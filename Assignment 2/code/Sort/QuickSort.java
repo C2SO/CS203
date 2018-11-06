@@ -2,7 +2,13 @@
 package Sort;
 
 public class QuickSort {
+
+    public long comparisons;
+    public long swaps;
+
     public QuickSort() {
+        comparisons = 0;
+        swaps = 0;
     }
 
     /*
@@ -16,13 +22,14 @@ public class QuickSort {
         for (int j = low; j < high; j++) {
             // If current element is smaller than or
             // equal to pivot
+            comparisons++;
             if (arr[j] <= pivot) {
                 i++;
-
                 // swap arr[i] and arr[j]
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
+                swaps++;
             }
         }
 
@@ -30,6 +37,7 @@ public class QuickSort {
         int temp = arr[i + 1];
         arr[i + 1] = arr[high];
         arr[high] = temp;
+        swaps++;
 
         return i + 1;
     }
@@ -52,23 +60,15 @@ public class QuickSort {
         }
     }
 
-    /* A utility function to print array of size n */
-    static void printArray(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-        System.out.println();
-    }
-
     // Driver program
-    public int[] start(int[] arr) {
+    public long[] start(int[] arr) {
         int n = arr.length;
 
-        QuickSort ob = new QuickSort();
-        ob.sort(arr, 0, n - 1);
-
-        System.out.println("sorted array");
-        printArray(arr);
-        return arr;
+        long startTime = System.nanoTime();
+        sort(arr, 0, n - 1);
+        long endTime = System.nanoTime();
+        long elapsedTime = endTime - startTime;
+        long[] results = { comparisons, swaps, elapsedTime };
+        return results;
     }
 }

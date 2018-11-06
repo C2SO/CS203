@@ -82,26 +82,12 @@ public class MergeSort {
         }
     }
 
-    /* A utility function to print array of size n */
-    static void printArray(int arr[]) {
-        int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-        System.out.println();
-    }
-
     // Driver method
     public long[] start(int[] arr) {
-
-        System.out.println("Given Array");
-        printArray(arr);
         long startTime = System.nanoTime();
         sort(arr, 0, arr.length - 1);
         long endTime = System.nanoTime();
         long elapsedTime = endTime - startTime;
-
-        System.out.println("\nSorted array");
-        printArray(arr);
         long[] results = {comparisons, swaps, elapsedTime};
         return results;
     }
