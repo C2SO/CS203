@@ -32,12 +32,12 @@ public class Main {
     }
 
     public static void test(int[] array) {
-        int[] resultsInsertion = new int[3]; //[comps, swaps, time]
-        int[] resultsMerge = new int[3];
-        int[] resultsQuick = new int[3];
+        long[] resultsInsertion = new long[3]; //[comps, swaps, time]
+        long[] resultsMerge = new long[3];
+        long[] resultsQuick = new long[3];
         resultsInsertion = insertionSort.start(array);
-        resultsMerge = mergeSort.start(array);
-        resultsQuick = quickSort.start(array);
+        // resultsMerge = mergeSort.start(array);
+        // resultsQuick = quickSort.start(array);
     }
 
 }

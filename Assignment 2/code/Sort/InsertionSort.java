@@ -2,7 +2,13 @@
 package Sort;
 
 public class InsertionSort {
+
+    public long comparisons;
+    public long swaps;
+
     public InsertionSort() {
+        comparisons = 0;
+        swaps = 0;
     }
 
     /* Function to sort array using insertion sort */
@@ -17,9 +23,14 @@ public class InsertionSort {
              * ahead of their current position
              */
             while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
+                this.comparisons++;
+                if (j >= 0 && arr[j] > key) {
+                    arr[j + 1] = arr[j];
+                    j = j - 1;
+                    this.swaps++;
+                }
             }
+            this.comparisons++;
             arr[j + 1] = key;
         }
     }
@@ -34,11 +45,16 @@ public class InsertionSort {
     }
 
     // Driver method
-    public int[] start(int[] arr) {
-        InsertionSort ob = new InsertionSort();
-        ob.sort(arr);
+    public long[] start(int[] arr) {
+        long startTime = System.nanoTime();
+
+        sort(arr);
+
+        long endTime = System.nanoTime();
+        long elapsedTime = endTime - startTime;
 
         printArray(arr);
-        return arr;
+        long[] result = { comparisons, swaps, elapsedTime };
+        return result;
     }
 }
