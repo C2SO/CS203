@@ -2,7 +2,12 @@
 package Sort;
 
 public class MergeSort {
+    public long comparisons;
+    public long swaps;
+
     public MergeSort() {
+        comparisons = 0;
+        swaps = 0;
     }
 
     // Merges two subarrays of arr[].
@@ -31,10 +36,13 @@ public class MergeSort {
         // Initial index of merged subarry array
         int k = l;
         while (i < n1 && j < n2) {
+            comparisons++;
             if (L[i] <= R[j]) {
                 arr[k] = L[i];
+                swaps++;
                 i++;
             } else {
+                swaps++;
                 arr[k] = R[j];
                 j++;
             }
@@ -44,6 +52,7 @@ public class MergeSort {
         /* Copy remaining elements of L[] if any */
         while (i < n1) {
             arr[k] = L[i];
+            swaps++;
             i++;
             k++;
         }
@@ -51,6 +60,7 @@ public class MergeSort {
         /* Copy remaining elements of R[] if any */
         while (j < n2) {
             arr[k] = R[j];
+            swaps++;
             j++;
             k++;
         }
@@ -81,16 +91,18 @@ public class MergeSort {
     }
 
     // Driver method
-    public int[] start(int[] arr) {
+    public long[] start(int[] arr) {
 
         System.out.println("Given Array");
         printArray(arr);
-
-        MergeSort ob = new MergeSort();
-        ob.sort(arr, 0, arr.length - 1);
+        long startTime = System.nanoTime();
+        sort(arr, 0, arr.length - 1);
+        long endTime = System.nanoTime();
+        long elapsedTime = endTime - startTime;
 
         System.out.println("\nSorted array");
         printArray(arr);
-        return arr;
+        long[] results = {comparisons, swaps, elapsedTime};
+        return results;
     }
 }

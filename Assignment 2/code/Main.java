@@ -36,8 +36,13 @@ public class Main {
         long[] resultsMerge = new long[3];
         long[] resultsQuick = new long[3];
         resultsInsertion = insertionSort.start(array);
-        // resultsMerge = mergeSort.start(array);
+        resultsMerge = mergeSort.start(array);
         // resultsQuick = quickSort.start(array);
+        // print(resultsInsertion, resultsMerge, resultsQuick);
+    }
+
+    public static void print(int[] insertion, int[] merge, int[] quick) {
+        
     }
 
 }
