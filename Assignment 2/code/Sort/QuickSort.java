@@ -3,6 +3,8 @@ package Sort;
 
 public class QuickSort {
 
+    boolean overflow = false;
+
     public long comparisons;
     public long swaps;
 
@@ -47,16 +49,20 @@ public class QuickSort {
      * low --> Starting index, high --> Ending index
      */
     void sort(int arr[], int low, int high) {
-        if (low < high) {
-            /*
-             * pi is partitioning index, arr[pi] is now at right place
-             */
-            int pi = partition(arr, low, high);
+        try {
+            if (low < high) {
+                /*
+                 * pi is partitioning index, arr[pi] is now at right place
+                 */
+                int pi = partition(arr, low, high);
 
-            // Recursively sort elements before
-            // partition and after partition
-            sort(arr, low, pi - 1);
-            sort(arr, pi + 1, high);
+                // Recursively sort elements before
+                // partition and after partition
+                sort(arr, low, pi - 1);
+                sort(arr, pi + 1, high);
+            }
+        } catch (StackOverflowError e) {
+            this.overflow = true;
         }
     }
 
@@ -69,6 +75,9 @@ public class QuickSort {
         long endTime = System.nanoTime();
         long elapsedTime = endTime - startTime;
         long[] results = { comparisons, swaps, elapsedTime };
+        if (overflow) {
+            System.out.println("Stack Overflow Exception in Quick Sort");
+        }
         return results;
     }
 }

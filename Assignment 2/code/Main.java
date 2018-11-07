@@ -10,7 +10,6 @@ public class Main {
     public static MergeSort mergeSort;
     public static InsertionSort insertionSort;
     public static QuickSort quickSort;
-    public static int arrayNumber = 0;
 
     public static void main(String[] args) {
         quickSort = new QuickSort();
@@ -26,6 +25,7 @@ public class Main {
         test(array3);
         test(array4);
         test(array5);
+        System.out.println("------------------------------------------------------------------------------------");
     }
 
     public static int[] buildArray(int size) {
@@ -38,20 +38,25 @@ public class Main {
     }
 
     public static void test(int[] array) {
-        arrayNumber++;
-        long[] resultsInsertion = new long[3]; // [comps, swaps, time]
+        System.out.println("------------------------------------------------------------------------------------");
+        final Object[][] table = new String[4][];
+        long[] resultsInsertion = new long[3];
         long[] resultsMerge = new long[3];
         long[] resultsQuick = new long[3];
-        System.out.println(arrayNumber + ": Insertion");
+        table[0] = new String[] {"Type of Sort", "Comparisons", "Swaps", "Execution Time"};
         resultsInsertion = insertionSort.start(array);
-        System.out.println(arrayNumber + ": Merge");
+        table[1] = new String[] {"Insertion Sort", Long.toString(resultsInsertion[0]), Long.toString(resultsInsertion[1]), Long.toString(resultsInsertion[2])};
         resultsMerge = mergeSort.start(array);
-        System.out.println(arrayNumber + ": Quick");
+        table[2] = new String[] {"Merge Sort", Long.toString(resultsMerge[0]), Long.toString(resultsMerge[1]), Long.toString(resultsMerge[2])};
         resultsQuick = quickSort.start(array);
-        // print(resultsInsertion, resultsMerge, resultsQuick);
+        table[3] = new String[] {"Quick Sort", Long.toString(resultsQuick[0]), Long.toString(resultsQuick[1]), Long.toString(resultsQuick[2])};
+        print(table);
     }
 
-    public static void print(int[] insertion, int[] merge, int[] quick) {
+    public static void print(Object[][] table) {
+        for (final Object[] row : table) {
+            System.out.format("%20s%20s%20s%20s\n", row);
+        }
 
     }
 
