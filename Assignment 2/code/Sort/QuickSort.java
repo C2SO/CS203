@@ -9,8 +9,6 @@ public class QuickSort {
     public long swaps;
 
     public QuickSort() {
-        comparisons = 0;
-        swaps = 0;
     }
 
     /*
@@ -68,6 +66,8 @@ public class QuickSort {
 
     // Driver program
     public long[] start(int[] arr) {
+        comparisons = 0;
+        swaps = 0;
         int n = arr.length;
 
         long startTime = System.nanoTime();
@@ -76,7 +76,7 @@ public class QuickSort {
         long elapsedTime = endTime - startTime;
         long[] results = { comparisons, swaps, elapsedTime };
         if (overflow) {
-            System.out.println("Stack Overflow Exception in Quick Sort");
+            System.out.print("Stack Overflow Exception in Quick Sort");
         }
         return results;
     }

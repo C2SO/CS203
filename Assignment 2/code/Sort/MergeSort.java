@@ -6,8 +6,6 @@ public class MergeSort {
     public long swaps;
 
     public MergeSort() {
-        comparisons = 0;
-        swaps = 0;
     }
 
     // Merges two subarrays of arr[].
@@ -84,6 +82,8 @@ public class MergeSort {
 
     // Driver method
     public long[] start(int[] arr) {
+        comparisons = 0;
+        swaps = 0;
         long startTime = System.nanoTime();
         sort(arr, 0, arr.length - 1);
         long endTime = System.nanoTime();

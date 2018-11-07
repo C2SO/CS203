@@ -7,8 +7,6 @@ public class InsertionSort {
     public long swaps;
 
     public InsertionSort() {
-        comparisons = 0;
-        swaps = 0;
     }
 
     /* Function to sort array using insertion sort */
@@ -37,6 +35,8 @@ public class InsertionSort {
 
     // Driver method
     public long[] start(int[] arr) {
+        comparisons = 0;
+        swaps = 0;
         long startTime = System.nanoTime();
 
         sort(arr);
