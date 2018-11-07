@@ -30,6 +30,7 @@ public class Main {
         int[] array5 = buildArray(50000); // Building random array with 50000 integers
         int[] arraySorted = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; // Pre-sorted array
         int[] arrayUnsorted = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1}; // Purposefully unsorted array
+        int[] arrayAlmostSorted = {1, 2, 3, 4, 5, 6, 7, 8, 10, 9}; // Almost sorted array
         System.out.println("------------------------------------------------------------------------------------");
         System.out.println("Array 1");
         test(array1); // Test array1
@@ -45,6 +46,8 @@ public class Main {
         test(arraySorted); // Test arraySorted
         System.out.println("Completely Unsorted Array");
         test(arrayUnsorted); // Test arrayUnsorted
+        System.out.println("Almost Sorted Array");
+        test(arrayAlmostSorted); // Test arrayAlmostSorted
     }
 
     /**********************************************/
