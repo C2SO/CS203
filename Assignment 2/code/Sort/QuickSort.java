@@ -11,6 +11,7 @@ public class QuickSort {
 
     public long comparisons; // Counts the comparisons between two values
     public long swaps; // Counts the switches between two values in the array
+    public boolean overflow; // Used to check if there was an overflow error
 
     /*************************************************/
     /* Method: QuickSort                             */
@@ -75,7 +76,7 @@ public class QuickSort {
                 sort(arr, pi + 1, high);
             }
         } catch (StackOverflowError e) { // If there is a StackOverflowError
-            this.overflow = true;
+            overflow = true;
         }
     }
 
@@ -86,8 +87,7 @@ public class QuickSort {
     /* Returns: long[] - Array that contains the test results  */
     /***********************************************************/
     public long[] start(int[] arr) {
-
-        boolean overflow = false; // Sets overflow boolean to false
+        overflow = false; // Sets overflow boolean to false
         comparisons = 0;
         swaps = 0;
         int n = arr.length; // Set as array length
