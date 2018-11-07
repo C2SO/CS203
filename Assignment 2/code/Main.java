@@ -2,7 +2,7 @@
 /* Nicholas Rahbany           */
 /* Login ID: rahb3032         */
 /* CS 203, Fall 2018          */
-/* Programming Assignment 1   */
+/* Programming Assignment 2   */
 /******************************/
 
 import Sort.*;
@@ -17,7 +17,7 @@ public class Main {
     /*********************************************/
     /* Method: main                              */
     /* Purpose: Defining method to run function  */
-    /* Parameters: String[] - arguments            */
+    /* Parameters: String[] - arguments          */
     /*********************************************/
     public static void main(String[] args) {
         quickSort = new QuickSort(); // Creating QuickSort Object
