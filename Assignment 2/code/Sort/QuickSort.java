@@ -1,4 +1,10 @@
-// Java program for implementation of QuickSort 
+/******************************/
+/* Nicholas Rahbany           */
+/* Login ID: rahb3032         */
+/* CS 203, Fall 2018          */
+/* Programming Assignment 1   */
+/******************************/
+
 package Sort;
 
 public class QuickSort {
