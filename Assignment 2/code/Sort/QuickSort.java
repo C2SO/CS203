@@ -19,42 +19,6 @@ public class QuickSort {
     /*************************************************/
     public QuickSort() {}
 
-    /********************************************************************/
-    /* Method: partition                                                */
-    /* Purpose: This function takes last element as pivot, places       */
-    /*     the pivot element at its correct position in sorted array,   */
-    /*     and places all smaller (smaller than pivot) to left of       */
-    /*     pivot and all greater elements to right of pivot             */
-    /* Parameters: int[] - Array that will be partitioned               */
-    /*             int low - Low index of array                         */
-    /*             int high - High index of array                       */
-    /********************************************************************/
-    int partition(int arr[], int low, int high) {
-        int pivot = arr[high];
-        int i = (low - 1); // index of smaller element
-        for (int j = low; j < high; j++) {
-            // If current element is smaller than or
-            // equal to pivot
-            comparisons++;
-            if (arr[j] <= pivot) {
-                i++;
-                // swap arr[i] and arr[j]
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-                swaps++;
-            }
-        }
-
-        // swap arr[i+1] and arr[high] (or pivot)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
-        arr[high] = temp;
-        swaps++;
-
-        return i + 1;
-    }
-
     /*************************************************/
     /* Method: sort                                  */
     /* Purpose: Sorts the array                      */
@@ -62,23 +26,48 @@ public class QuickSort {
     /*             int low - Low index of array      */
     /*             int high - High index of array    */
     /*************************************************/
-    void sort(int arr[], int low, int high) {
-        try {
-            if (low < high) {
-                /*
-                 * pi is partitioning index, arr[pi] is now at right place
-                 */
-                int pi = partition(arr, low, high);
-
-                // Recursively sort elements before
-                // partition and after partition
-                sort(arr, low, pi - 1);
-                sort(arr, pi + 1, high);
+    public void sort(int[] arr, int low, int high) {
+		if (arr == null || arr.length == 0)
+			return;
+ 
+		if (low >= high)
+			return;
+ 
+		// pick the pivot
+		int middle = low + (high - low) / 2;
+		int pivot = arr[middle];
+ 
+		// make left < pivot and right > pivot
+		int i = low, j = high;
+		while (i <= j) {
+			while (arr[i] < pivot) {
+                comparisons++;
+				i++;
+			}
+ 
+			while (arr[j] > pivot) {
+                comparisons++;
+				j--;
             }
-        } catch (StackOverflowError e) { // If there is a StackOverflowError
-            overflow = true;
-        }
-    }
+            
+            comparisons++;
+			if (i <= j) {
+				int temp = arr[i];
+				arr[i] = arr[j];
+                arr[j] = temp;
+                swaps++;
+				i++;
+				j--;
+			}
+		}
+ 
+		// recursively sort two sub parts
+		if (low < j)
+			sort(arr, low, j);
+ 
+		if (high > i)
+			sort(arr, i, high);
+	}
 
     /***********************************************************/
     /* Method: start                                           */

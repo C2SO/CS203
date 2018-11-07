@@ -72,7 +72,6 @@ public class Main {
         long[] resultsMerge = new long[3]; // Results of merge test
         long[] resultsQuick = new long[3]; // Results of quick test
         System.out.println("Number of Items: " + array.length);
-        System.out.print("Errors: ");
         table[0] = new String[] {"Type of Sort", "Comparisons", "Swaps", "Execution Time"};
         resultsInsertion = insertionSort.start(array); // Runs insertion test
         table[1] = new String[] {"Insertion Sort", Long.toString(resultsInsertion[0]), Long.toString(resultsInsertion[1]), Long.toString(resultsInsertion[2])};
@@ -80,7 +79,6 @@ public class Main {
         table[2] = new String[] {"Merge Sort", Long.toString(resultsMerge[0]), Long.toString(resultsMerge[1]), Long.toString(resultsMerge[2])};
         resultsQuick = quickSort.start(array); // Runs quick test
         table[3] = new String[] {"Quick Sort", Long.toString(resultsQuick[0]), Long.toString(resultsQuick[1]), Long.toString(resultsQuick[2])};
-        System.out.println("");
         print(table);
         System.out.println("------------------------------------------------------------------------------------");
     }
