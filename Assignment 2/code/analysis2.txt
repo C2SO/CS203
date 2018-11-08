@@ -1,0 +1,99 @@
+With the results this test has collected, we can analyze each sorting method and see the pros and cons of each.
+
+For Array 1 through Array 5, each item in the array is randomly generated.
+
+------------------------------------------------------------------------------------
+Array 1
+Number of Items: 1000
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort              247813              246814             4883039
+          Merge Sort                5044                9976             1788473
+          Quick Sort                8498                 511              813134
+------------------------------------------------------------------------------------
+
+With this array, we can see that Merge Sort has the least comparisons made, but Quick Sort has
+the least amount of time ran and least amount of swaps. Insertion sort is just the slowest of 
+them all with the most amount of comparisons, swaps, and time to execute.
+
+------------------------------------------------------------------------------------
+Array 2
+Number of Items: 5000
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort             6301808             6296809            15493281
+          Merge Sort               32004               61808              736970
+          Quick Sort               54774                2952              331460
+------------------------------------------------------------------------------------
+
+With this array, the same arguments with Array 1 hold. Merge Sort is still the least in 
+comparisons made while Quick Sort has the least amount of time to execute and the least 
+amount of Swaps. Insertion Sort is still at the tail end of this.
+
+------------------------------------------------------------------------------------
+Array 3
+Number of Items: 10000
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort            24848175            24838176            33210164
+          Merge Sort               69008              133616              834997
+          Quick Sort              119535                5904              135758
+------------------------------------------------------------------------------------
+Array 4
+Number of Items: 20000
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort           100412999           100393000           103508926
+          Merge Sort              148016              287232             2106533
+          Quick Sort              259056               11808              259526
+------------------------------------------------------------------------------------
+Array 5
+Number of Items: 50000
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort           627412675           627362676           665069312
+          Merge Sort              401952              784464             4422873
+          Quick Sort              717248               32767              730270
+------------------------------------------------------------------------------------
+
+As like with Array 1 and Array 2, the same analysis holds.
+
+------------------------------------------------------------------------------------
+Sorted Array
+Number of Items: 10
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort                   9                   0                 352
+          Merge Sort                  19                  34                1057
+          Quick Sort                  25                   6                 353
+------------------------------------------------------------------------------------
+
+For a completely sorted array with the values [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], Insertion 
+Sort is the most efficient with the least amount of comparisons, swaps, and execution time. 
+Quick Sort is barely behind in execution time buthas the most amount of comparisons, 
+while Merge Sort has the most amount of swaps made.
+
+------------------------------------------------------------------------------------
+Completely Unsorted Array
+Number of Items: 10
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort                  54                  45                 353
+          Merge Sort                  19                  34                1411
+          Quick Sort                  25                   6                 706
+------------------------------------------------------------------------------------
+
+For this array with the values of [10, 9, 8, 7, 6, 5, 4, 3, 2, 1], Insertion Sort still is the quickest sort of the
+three, while Quick Sort made the least amount of swaps and Merge Sort had the least amount of comparisons.
+
+------------------------------------------------------------------------------------
+Almost Sorted Array
+Number of Items: 10
+        Type of Sort         Comparisons               Swaps      Execution Time
+      Insertion Sort                  10                   1                 705
+          Merge Sort                  19                  34                2115
+          Quick Sort                  25                   6                1058
+------------------------------------------------------------------------------------
+
+With this last array with the values [1, 2, 3, 4, 5, 6, 7, 8, 10, 9], Insertion Sort is the most efficient with the
+least number of comparisons, swaps, and execution time. Merge Sort is the least efficient in time and swaps but is better
+than Quick Sort with number of comparisons. Quick Sort is in the middle with it's number of swaps and execution time while
+is the worst with the number of comparisons.
+
+With this data, I can deduce that with smaller arrays, Insertion Sort is the most efficient way to go.
+As the array size increases, Quick Sort will become the most efficient sort. Merge Sort will always
+be better than Quick Sort with number of comparisons but will be unmatched in number of swaps
+and the execution time.

@@ -44,11 +44,13 @@ public class QuickSort {
                 comparisons++;
 				i++;
 			}
+            comparisons++;
  
 			while (arr[j] > pivot) {
                 comparisons++;
 				j--;
             }
+            comparisons++;
             
             comparisons++;
 			if (i <= j) {

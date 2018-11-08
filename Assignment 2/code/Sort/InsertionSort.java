@@ -35,11 +35,9 @@ public class InsertionSort {
              */
             while (j >= 0 && arr[j] > key) {
                 this.comparisons++;
-                if (j >= 0 && arr[j] > key) {
-                    arr[j + 1] = arr[j];
-                    j = j - 1;
-                    this.swaps++;
-                }
+                arr[j + 1] = arr[j];
+                j = j - 1;
+                this.swaps++;
             }
             this.comparisons++;
             arr[j + 1] = key;
