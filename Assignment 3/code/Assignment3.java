@@ -1,37 +1,56 @@
+/******************************/
+/* Nicholas Rahbany           */
+/* Login ID: rahb3032         */
+/* CS 203, Fall 2018          */
+/* Programming Assignment 3   */
+/******************************/
+
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.*;
 
 public class Assignment3 {
+
+    public static File file; // File used as input
+    public static Scanner scan; // Scanner used to read file
+    public static int baseNum; // Used as the dimensions for the matrix
+    public static int inputNum = 0; // Used as the number being added to the matrix
+
+    /*********************************************/
+    /* Method: main                              */
+    /* Purpose: Defining method to run function  */
+    /* Parameters: String[] - arguments          */
+    /*********************************************/
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("input.txt");
-        Scanner scan = new Scanner(file);
+        file = new File("input.txt");
+        scan = new Scanner(file); 
+        baseNum = scan.nextInt(); 
 
-        int baseNum = scan.nextInt();
-        int inputNum = 0;
-        int[][] matrix = new int[baseNum][baseNum];
-
-        for (int r = 0; r < matrix.length; r++) {
-            for (int c = r + 1; c < matrix[0].length; c++) {
-                inputNum = scan.nextInt();
-                matrix[r][c] = inputNum;
+        // Make matrix
+        int[][] matrix = new int[baseNum][baseNum]; // Matrix used to store the values
+        for (int row = 0; row < matrix.length; row++) { // For each row
+            for (int col = row + 1; col < matrix[0].length; col++) { // For each column where it's row + 1
+                inputNum = scan.nextInt(); // Scan the next number
+                matrix[row][col] = inputNum; // Place the number here
             }
         }
 
-        solve(matrix);
-
         // Print matrix
-
-        for (int r = 0; r < matrix.length; r++) {
-            for (int c = 0; c < matrix[0].length; c++) {
-                if (matrix[r][c] < 10)
-                    System.out.print(" " + matrix[r][c] + " ");
+        for (int row = 0; row < matrix.length; row++) { // For each row
+            for (int col = 0; col < matrix[0].length; col++) { // For each column
+                // Used to keep characters even
+                if (matrix[row][col] < 10) 
+                    System.out.print(" " + matrix[row][col] + " ");
                 else
-                    System.out.print(matrix[r][c] + " ");
+                    System.out.print(matrix[row][col] + " ");
             }
             System.out.println();
         }
+        System.out.println();
+
+        // Solve the matrix
+        solve(matrix); 
     }
 
     /**
@@ -81,7 +100,7 @@ public class Assignment3 {
         }
 
         System.out.println(
-                "Minimum path: " + recover(solutionArr).toString() + ", Minimum cost: " + solutionArr[n - 1][n - 1]);
+                " Minimum path: " + recover(solutionArr).toString() + ", Minimum cost: " + solutionArr[n - 1][n - 1]);
     }
 
     /**
