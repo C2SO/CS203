@@ -37,48 +37,34 @@ public class Assignment3 {
         }
 
         // Print matrix
-        for (int row = 0; row < matrix.length; row++) { // For each row
-            for (int col = 0; col < matrix[0].length; col++) { // For each column
-                // Used to keep characters even
-                if (matrix[row][col] < 10) 
-                    System.out.print(" " + matrix[row][col] + " ");
-                else
-                    System.out.print(matrix[row][col] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        print(matrix);
 
         // Solve the matrix
         solve(matrix); 
     }
 
-    /**
-     * Obtains and prints the lowest possible cost of canoe-ing down the river
-     */
+    /**************************************************/
+    /* Method: solve                                  */
+    /* Purpose: Looks for optimal solution in matrix  */
+    /* Parameters: int[][] - matrix                   */
+    /**************************************************/
     public static void solve(int[][] matrix) {
         int n = matrix[0].length;
-        Integer[][] solutionArr = new Integer[n][n];
-        /*
-         * Fill in top row of solution array Will always be the same as the top row of
-         * the input
-         */
+        Integer[][] solutionArr = new Integer[n][n]; // Used to visualize the optimal solution
+        
+        // Fill in top row of matrix (will be same as original matrix)
         for (int i = 0; i < n; i++) {
             solutionArr[0][i] = matrix[0][i];
         }
-        // Top to bottom
-        for (int i = 1; i < n; i++) {
+
+        for (int row = 1; row < n; row++) {
             // Left to right
-            for (int j = i; j < n; j++) {
+            for (int col = row; col < n; col++) {
                 int minValue = -1;
 
-                // Find the minimum value of all values to the left of the current cell [i][j]
-                // added onto the current cell. That is, the most optimal previous value plus
-                // the price
-                // of renting a canoe in this particular column.
-                for (int k = i; k < j; k++) {
-                    if (solutionArr[i][k] + matrix[i][j] < minValue || minValue == -1) {
-                        minValue = solutionArr[i][k] + matrix[i][j];
+                for (int newCol = row; newCol < col; newCol++) { // For each newCol where it is less than the current col
+                    if (solutionArr[row][newCol] + matrix[row][col] < minValue || minValue == -1) { // If [row][newCol] + [row][col] < minval or minval = -1
+                        minValue = solutionArr[row][newCol] + matrix[row][col]; // Set new minimum to [row][newCol] + [row][col]
                     }
                 }
                 // find the minimum value of all cells above in the same column of the current
@@ -86,16 +72,16 @@ public class Assignment3 {
                 // if any of these values are less than the current minimum obtained from
                 // looking to the left,
                 // update the minimum to the value above as it is more optimal.
-                for (int k = 0; k < i; k++) {
-                    if (matrix[k][j] != -1) {
-                        if (solutionArr[k][j] < minValue || minValue == -1) {
-                            minValue = solutionArr[k][j];
+                for (int newRow = 0; newRow < row; newRow++) {
+                    if (matrix[newRow][col] != -1) {
+                        if (solutionArr[newRow][col] < minValue || minValue == -1) {
+                            minValue = solutionArr[newRow][col];
                         }
                     }
                 }
                 // Finally, update the current cell to the most optimal value obtained from the
                 // above loops.
-                solutionArr[i][j] = minValue;
+                solutionArr[row][col] = minValue;
             }
         }
 
@@ -132,7 +118,6 @@ public class Assignment3 {
 
             int current = solutionArr[row][col];
             int above = solutionArr[row - 1][col];
-            // int left = solutionArr[row][col-1];
 
             if (current == above) {
                 row--; // go up
@@ -153,6 +138,20 @@ public class Assignment3 {
         }
         // System.out.printf("Winning indexes = %s\n", winSet.toString());
         return winSet;
+    }
+
+    public static void print(int[][] matrix) {
+        for (int row = 0; row < matrix.length; row++) { // For each row
+            for (int col = 0; col < matrix[0].length; col++) { // For each column
+                // Used to keep characters even
+                if (matrix[row][col] < 10) 
+                    System.out.print(" " + matrix[row][col] + " ");
+                else
+                    System.out.print(matrix[row][col] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
 }
