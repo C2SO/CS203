@@ -1,0 +1,19 @@
+How my recursive function found the optimal solution:
+
+I created a new table and named it "solutionArr'
+After that, I set the whole top row equal to the top row of the original table
+Next, I made a for loop for going through the rows top to bottom.
+I then made another for loop that went through each column, left to right.
+Now that those loops cover each cell, i made two for loops that will run in each cell.
+The first one checks if two cells combined together are less than the current minimum.
+    If so, then the new minimum value is set to that value.
+The second for loop checks through and sees if one specific cell in the path is less than the minimum.
+    If it is, then the minimum value is set to that value.
+
+At the end of those loops, the current cell is then filled with the minimum value that
+    can be achieved. This loops through every cell.
+
+After that, the final result is the minimum value at the furthest reaches of the table:
+    solutionArr[n-1][n-1]
+
+Efficiency: O(log(n))
