@@ -85,17 +85,17 @@ public class Assignment3 {
             }
         }
 
-        System.out.println(
-                " Minimum path: " + path(solutionArr).toString() + "\n Minimum cost: " + solutionArr[n - 1][n - 1]);
+        System.out.println(" Minimum path:");
+        optimalSolution(solutionArr);
+        System.out.print("\n Minimum cost: " + solutionArr[n - 1][n - 1]);
     }
 
     /*******************************************/
-    /* Method: path                            */
+    /* Method: optimalSolution                 */
     /* Purpose: Finds optimal path for matrix  */
     /* Parameters: int[][] - matrix            */
-    /* Returns: Set containing optimal path    */
     /*******************************************/
-    public static Set<Integer> path(Integer[][] solutionArr) {
+    public static void optimalSolution(Integer[][] solutionArr) {
 
         // start in bottom right cell of solution array
         int n = solutionArr[0].length;
@@ -127,7 +127,12 @@ public class Assignment3 {
                 col = minIndex; // go back one column and restart the loop
             }
         }
-        return optimalSet;
+
+        // Print optimal path
+        System.out.print(" 0");
+        for (Integer s: optimalSet) {
+            System.out.print(" -> " + s);
+        }
     }
 
     /***************************************/
