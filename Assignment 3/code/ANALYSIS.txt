@@ -15,3 +15,5 @@ At the end of those loops, the current cell is then filled with the minimum valu
 
 After that, the final result is the minimum value at the furthest reaches of the table:
     solutionArr[n-1][n-1]
+
+Efficiency: O(log(n))
