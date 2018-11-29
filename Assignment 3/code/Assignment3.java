@@ -86,31 +86,24 @@ public class Assignment3 {
         }
 
         System.out.println(
-                " Minimum path: " + recover(solutionArr).toString() + ", Minimum cost: " + solutionArr[n - 1][n - 1]);
+                " Minimum path: " + path(solutionArr).toString() + "\n Minimum cost: " + solutionArr[n - 1][n - 1]);
     }
 
-    /**
-     * Recovers the optimal path from the solution array obtained from the dynamic
-     * programming approach.
-     *
-     * @param solutionArr the solution array
-     * @return a set of the winning indexes. (not zero based)
-     */
-    public static Set<Integer> recover(Integer[][] solutionArr) {
-        // algorithm:
-        // add first and last col # to solution set
+    /*******************************************/
+    /* Method: path                            */
+    /* Purpose: Finds optimal path for matrix  */
+    /* Parameters: int[][] - matrix            */
+    /* Returns: Set containing optimal path    */
+    /*******************************************/
+    public static Set<Integer> path(Integer[][] solutionArr) {
 
         // start in bottom right cell of solution array
-
-        // if cell above is equal to current cell
-        // go up
-        // else
-        // go left, record new col in solution
         int n = solutionArr[0].length;
-        Set<Integer> winSet = new TreeSet<>(); /* O(log(n)) */
+        Set<Integer> optimalSet = new TreeSet<>(); /* O(log(n)) */
 
-        winSet.add(1);
-        winSet.add(n); // add first and last column to winning set
+        // add first and last col # to solution set
+        optimalSet.add(1);
+        optimalSet.add(n); // add first and last column to winning set
         int row = n - 1, col = n - 1; // very last cell
 
         // while we're still recovering the path
@@ -119,27 +112,29 @@ public class Assignment3 {
             int current = solutionArr[row][col];
             int above = solutionArr[row - 1][col];
 
+            // if cell above is equal to current cell
             if (current == above) {
-                row--; // go up
+                row--; // go upmin
             } else { // optimal path comes from the left, add previous column to solution path
-                int min = Integer.MAX_VALUE;
                 int minIndex = Integer.MAX_VALUE;
                 int i;
                 for (i = row; i < col; i++) {
-
-                    if (solutionArr[row][i] < min) {
-                        min = solutionArr[row][i];
+                    if (solutionArr[row][i] < Integer.MAX_VALUE) {
                         minIndex = i;
                     }
                 }
-                winSet.add(minIndex + 1);
+                optimalSet.add(minIndex + 1);
                 col = minIndex; // go back one column and restart the loop
             }
         }
-        // System.out.printf("Winning indexes = %s\n", winSet.toString());
-        return winSet;
+        return optimalSet;
     }
 
+    /***************************************/
+    /* Method: print                       */
+    /* Purpose: Prints the inputed matrix  */
+    /* Parameters: int[][] - matrix        */
+    /***************************************/
     public static void print(int[][] matrix) {
         for (int row = 0; row < matrix.length; row++) { // For each row
             for (int col = 0; col < matrix[0].length; col++) { // For each column
