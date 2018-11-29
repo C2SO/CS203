@@ -23,7 +23,7 @@ public class Assignment3 {
     /* Parameters: String[] - arguments          */
     /*********************************************/
     public static void main(String[] args) throws FileNotFoundException {
-        file = new File("input.txt");
+        file = new File("inputC.txt");
         scan = new Scanner(file); 
         baseNum = scan.nextInt(); 
 
@@ -67,11 +67,8 @@ public class Assignment3 {
                         minValue = solutionArr[row][newCol] + matrix[row][col]; // Set new minimum to [row][newCol] + [row][col]
                     }
                 }
-                // find the minimum value of all cells above in the same column of the current
-                // cell
-                // if any of these values are less than the current minimum obtained from
-                // looking to the left,
-                // update the minimum to the value above as it is more optimal.
+               
+                // Find the minimum value for each row and column
                 for (int newRow = 0; newRow < row; newRow++) {
                     if (matrix[newRow][col] != -1) {
                         if (solutionArr[newRow][col] < minValue || minValue == -1) {
@@ -79,8 +76,8 @@ public class Assignment3 {
                         }
                     }
                 }
-                // Finally, update the current cell to the most optimal value obtained from the
-                // above loops.
+
+                // Set [row][col] to the minimum value for that specified area
                 solutionArr[row][col] = minValue;
             }
         }
@@ -101,10 +98,10 @@ public class Assignment3 {
         int n = solutionArr[0].length;
         Set<Integer> optimalSet = new TreeSet<>(); /* O(log(n)) */
 
-        // add first and last col # to solution set
-        optimalSet.add(1);
+        // add last col # to solution set
         optimalSet.add(n); // add first and last column to winning set
-        int row = n - 1, col = n - 1; // very last cell
+        int row = n - 1;
+        int col = n - 1;
 
         // while we're still recovering the path
         while (row > 0) {
@@ -114,7 +111,7 @@ public class Assignment3 {
 
             // if cell above is equal to current cell
             if (current == above) {
-                row--; // go upmin
+                row--; // go up
             } else { // optimal path comes from the left, add previous column to solution path
                 int minIndex = Integer.MAX_VALUE;
                 int i;
