@@ -23,7 +23,7 @@ public class Assignment3 {
     /* Parameters: String[] - arguments          */
     /*********************************************/
     public static void main(String[] args) throws FileNotFoundException {
-        file = new File("inputC.txt");
+        file = new File("input.txt");
         scan = new Scanner(file); 
         baseNum = scan.nextInt(); 
 
@@ -83,16 +83,18 @@ public class Assignment3 {
         }
 
         System.out.println(" Minimum path:");
-        optimalSolution(solutionArr);
+        optimalSolution(solutionArr, solutionArr[n - 1][n - 1], matrix);
         System.out.print("\n Minimum cost: " + solutionArr[n - 1][n - 1]);
     }
 
-    /*******************************************/
-    /* Method: optimalSolution                 */
-    /* Purpose: Finds optimal path for matrix  */
-    /* Parameters: int[][] - matrix            */
-    /*******************************************/
-    public static void optimalSolution(Integer[][] solutionArr) {
+    /*******************************************************************/
+    /* Method: optimalSolution                                         */
+    /* Purpose: Finds optimal path for matrix                          */
+    /* Parameters: int[][] - matrix                                    */
+    /*             Integer[][] - Array used to trace optimal solution  */
+    /*             Integer - Minimum cost                              */
+    /*******************************************************************/
+    public static void optimalSolution(Integer[][] solutionArr, Integer solution, int[][] matrix) {
 
         // start in bottom right cell of solution array
         int n = solutionArr[0].length;
@@ -121,8 +123,13 @@ public class Assignment3 {
                     }
                 }
                 optimalSet.add(minIndex + 1);
+                solution -= matrix[row][col];
                 col = minIndex; // go back one column and restart the loop
             }
+        }
+        
+        if (solution - solutionArr[0][1] == 0) {
+            optimalSet.add(1);
         }
 
         // Print optimal path
