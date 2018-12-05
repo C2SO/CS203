@@ -37,7 +37,7 @@ public class Assignment3 {
         }
 
         // Print matrix
-        print(matrix);
+        // print(matrix);
 
         // Solve the matrix
         solve(matrix); 
@@ -48,6 +48,7 @@ public class Assignment3 {
     /* Purpose: Looks for optimal solution in matrix  */
     /* Parameters: int[][] - matrix                   */
     /**************************************************/
+    // I built this in reverse, just a warning
     public static void solve(int[][] matrix) {
         int n = matrix[0].length;
         Integer[][] solutionArr = new Integer[n][n]; // Used to visualize the optimal solution
@@ -81,6 +82,8 @@ public class Assignment3 {
                 solutionArr[row][col] = minValue;
             }
         }
+
+        print(solutionArr);
 
         System.out.println(" Minimum path:");
         optimalSolution(solutionArr, solutionArr[n - 1][n - 1], matrix);
@@ -133,7 +136,7 @@ public class Assignment3 {
         }
 
         // Print optimal path
-        System.out.print(" 0");
+        System.out.print(" 1");
         for (Integer s: optimalSet) {
             System.out.print(" -> " + s);
         }
@@ -144,11 +147,13 @@ public class Assignment3 {
     /* Purpose: Prints the inputed matrix  */
     /* Parameters: int[][] - matrix        */
     /***************************************/
-    public static void print(int[][] matrix) {
+    public static void print(Integer[][] matrix) {
         for (int row = 0; row < matrix.length; row++) { // For each row
             for (int col = 0; col < matrix[0].length; col++) { // For each column
                 // Used to keep characters even
-                if (matrix[row][col] < 10) 
+                if (matrix[row][col] == null)
+                    System.out.print(" 0 ");
+                else if (matrix[row][col] < 10) 
                     System.out.print(" " + matrix[row][col] + " ");
                 else
                     System.out.print(matrix[row][col] + " ");
